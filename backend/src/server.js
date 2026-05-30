@@ -24,4 +24,11 @@ const startServer = async () => {
 };
 
 // Execute the function to boot up the server
-startServer();
+startServer().catch((err) => {
+  console.error("==========================================");
+  console.error("🔥 CRITICAL SERVER STARTUP ERROR 🔥");
+  console.error(err);
+  console.error("==========================================");
+  // Give Render's logging system 1 second to flush the error to the dashboard before crashing
+  setTimeout(() => process.exit(1), 1000);
+});
