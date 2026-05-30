@@ -1,0 +1,20 @@
+{
+  "name": "rateguard-sdk",
+  "version": "1.0.0",
+  "description": "Official RateGuard SDK for Node.js - Distributed API Rate Limiting",
+  "main": "./src/index.js",
+  "type": "module",
+  "keywords": [
+    "rate-limit",
+    "middleware",
+    "express",
+    "api",
+    "rateguard"
+  ],
+  "author": "RateGuard",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/rateguard-sdk.git"
+  }
+}

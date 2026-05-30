@@ -1,0 +1,1 @@
+export const DEFAULT_BASE_URL = process.env.RATEGUARD_API_URL || "http://localhost:5000/api";
