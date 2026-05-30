@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function DocsPage() {
   // Get the current backend URL that the frontend is using
-  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:4000";
+  const apiUrl = import.meta.env.VITE_API_URL || "https://rateguard-yfcb.onrender.com/api";
 
   return (
     <DashboardLayout>
