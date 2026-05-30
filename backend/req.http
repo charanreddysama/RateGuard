@@ -1,0 +1,68 @@
+### REGISTER
+
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name":"Charan",
+  "email":"charan@gmail.com",
+  "password":"123456"
+}
+
+### LOGIN
+
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email":"charan@gmail.com",
+  "password":"123456"
+}
+
+### CREATE PROJECT
+
+POST http://localhost:5000/api/projects/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMTU0ZDEwYTllYzU3ZDc5MmZjYjViYSIsImlhdCI6MTc3OTc4Mzg2MywiZXhwIjoxNzgwMzg4NjYzfQ.5brrxWNPlO8DpITDVToBg2UMyc9QGqBQXW_yd1jESx4
+
+{
+  "name":"My First Project"
+}
+
+
+### CREATE RULE
+
+POST http://localhost:5000/api/rules/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMTU0ZDEwYTllYzU3ZDc5MmZjYjViYSIsImlhdCI6MTc3OTc4Mzg2MywiZXhwIjoxNzgwMzg4NjYzfQ.5brrxWNPlO8DpITDVToBg2UMyc9QGqBQXW_yd1jESx4
+
+{
+  "projectId":"6a15597055228b7e1df4e28b",
+  "route":"/products",
+  "algorithm":"leaky_bucket",
+  "limit":5,
+  "window":60
+}
+
+### TEST PRODUCTS API
+
+GET http://localhost:5000/api/test/products
+x-api-key: ab83e43a-8737-4f5c-b980-6b52ccf3fdc5
+
+### TEST ANALYTICS
+GET  http://localhost:5000/api/analytics/6a15597055228b7e1df4e28b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhMTU0ZDEwYTllYzU3ZDc5MmZjYjViYSIsImlhdCI6MTc3OTc4Mzg2MywiZXhwIjoxNzgwMzg4NjYzfQ.5brrxWNPlO8DpITDVToBg2UMyc9QGqBQXW_yd1jESx4
+
+
+###TEST UNIVERSAL API
+POST http://localhost:5000/api/limiter/check
+Content-Type: application/json
+x-api-key: 06720d9e-3823-4008-9573-28e14251b21e
+
+{
+  "route": "/products",
+  "identifier": "user-123"
+}
+
+
+### Project SDK Test

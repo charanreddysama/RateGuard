@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@rateguard/sdk": "file:../rateguard-sdk",
+    "express": "^5.2.1"
+  },
+  "type": "module"
+}

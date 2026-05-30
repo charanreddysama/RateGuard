@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing Scale matching design system req */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+
+  /* Typography */
+  --text-heading-xl: 48px;
+  --text-heading-l: 32px;
+  --text-heading-m: 24px;
+  --text-body: 16px;
+  --text-caption: 14px;
+}
+
+@layer base {
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --bg-card: #ffffff;
+    
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-muted: #9ca3af;
+    
+    --border-subtle: #e5e7eb;
+    --border-strong: #d1d5db;
+    
+    --brand-primary: #dc2626; /* Redis-like Red */
+    --brand-hover: #b91c1c;
+    
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.5);
+  }
+
+  .dark {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #121212;
+    --bg-card: #171717;
+    
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #6b7280;
+    
+    --border-subtle: #262626;
+    --border-strong: #404040;
+    
+    --brand-primary: #ef4444; /* Redis-like Red */
+    --brand-hover: #dc2626;
+    
+    --glass-bg: rgba(23, 23, 23, 0.7);
+    --glass-border: rgba(64, 64, 64, 0.5);
+  }
+
+  * {
+    border-color: var(--border-subtle);
+  }
+
+  body {
+    @apply bg-[var(--bg-primary)] text-[var(--text-primary)] font-sans antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@layer utilities {
+  .text-heading-xl {
+    @apply text-4xl md:text-[var(--text-heading-xl)] font-bold tracking-tight;
+  }
+  .text-heading-l {
+    @apply text-3xl md:text-[var(--text-heading-l)] font-semibold tracking-tight;
+  }
+  .text-heading-m {
+    @apply text-2xl md:text-[var(--text-heading-m)] font-semibold;
+  }
+  .text-body {
+    @apply text-base md:text-[var(--text-body)] font-normal;
+  }
+  .text-caption {
+    @apply text-sm md:text-[var(--text-caption)] font-medium text-[var(--text-secondary)];
+  }
+
+  .glass-card {
+    @apply bg-[var(--glass-bg)] backdrop-blur-xl border border-[var(--glass-border)] shadow-sm rounded-xl;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-md hover:-translate-y-1 hover:border-[var(--brand-primary)]/30;
+  }
+
+  .container-width {
+    @apply max-w-7xl mx-auto px-6 lg:px-8 w-full;
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 30s linear infinite;
+}
