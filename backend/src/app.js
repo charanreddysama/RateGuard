@@ -25,6 +25,7 @@ app.use(express.json());
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
+  "https://rate-guard-alpha.vercel.app", // Live Vercel Frontend
   process.env.FRONTEND_URL
 ].filter(Boolean);
 
