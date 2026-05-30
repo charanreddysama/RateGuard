@@ -2,6 +2,16 @@ import dotenv from "dotenv";
 // Load environment variables from the .env file so we can securely access secrets like database URLs
 dotenv.config();
 
+process.on('uncaughtException', (err) => {
+  console.error("UNCAUGHT EXCEPTION:", err);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error("UNHANDLED REJECTION:", reason);
+  process.exit(1);
+});
+
 import app from "./app.js";
 import { connectDB } from "./config/db.js";
 import { connectRedis } from "./config/redis.js";
