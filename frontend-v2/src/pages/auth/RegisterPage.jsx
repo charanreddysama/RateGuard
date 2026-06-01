@@ -54,13 +54,9 @@ function RegisterPage() {
     setLoading(true);
     try {
       const data = await registerUser(form);
-      if (data.token && data.user) {
-        login(data.user, data.token);
-        navigate("/dashboard");
-      } else {
-        // If backend doesn't return token (just message), go to login
-        navigate("/login");
-      }
+      // We no longer auto-login. We just alert and redirect to login page.
+      alert("Registration successful! Please log in.");
+      navigate("/login");
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed. Please try again.");
     } finally {
@@ -116,6 +112,9 @@ function RegisterPage() {
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
+          <p className="text-xs text-[var(--text-muted)] mt-1.5">
+            Minimum 6 characters, at least 1 uppercase letter, and 1 special character.
+          </p>
         </div>
 
         {error && (

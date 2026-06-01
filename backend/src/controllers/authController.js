@@ -10,6 +10,17 @@ export const register = async (req, res) => {
     // 1. Get the name, email, and password that the user typed in the frontend form
     const { name, email, password } = req.body;
 
+    // Validate password
+    const minLength = password?.length >= 6;
+    const hasUpper = /[A-Z]/.test(password || "");
+    const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password || "");
+    
+    if (!minLength || !hasUpper || !hasSpecial) {
+      return res.status(400).json({
+        message: "Password must be at least 6 characters long, contain 1 uppercase letter, and 1 special character."
+      });
+    }
+
     // 2. Check the database to see if a user with this email already exists
     const existingUser = await User.findOne({ email });
 

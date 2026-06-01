@@ -21,7 +21,7 @@ function Hero() {
           </div>
 
           {/* TITLE */}
-          <h1 className="text-5xl lg:text-7xl leading-[1.1] tracking-tight font-[850]">
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl leading-[1.1] tracking-tight font-[850] text-balance">
             Protect your APIs from <span className="gradient-text">DDoS attacks</span> & abuse.
           </h1>
 
