@@ -51,7 +51,7 @@ function LoginPage() {
       login(data.user, data.token);
       
       // Redirect them to the main dashboard!
-      navigate("/dashboard");
+      navigate("/dashboard/docs");
     } catch (err) {
       // If the backend rejected the login (wrong password, etc.), show the error message in red text
       setError(err.response?.data?.message || "Invalid credentials. Please try again.");
