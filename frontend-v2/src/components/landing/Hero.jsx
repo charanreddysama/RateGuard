@@ -1,8 +1,12 @@
+import { useContext } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Button from "../ui/Button";
+import { AuthContext } from "../../context/AuthContext";
 
 function Hero() {
+  const { user } = useContext(AuthContext);
+
   return (
     <section className="min-h-screen flex items-center pt-32 pb-16">
       <div className="container-width grid lg:grid-cols-2 gap-16 items-center">
@@ -21,8 +25,8 @@ function Hero() {
           </div>
 
           {/* TITLE */}
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl leading-[1.1] tracking-tight font-[850] text-balance">
-            Protect your APIs from <span className="gradient-text">DDoS attacks</span> & abuse.
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl leading-[1.1] tracking-tight font-[850] text-balance break-words">
+            Protect your APIs from <span className="gradient-text whitespace-normal">DDoS attacks</span> & abuse.
           </h1>
 
           {/* DESCRIPTION */}
@@ -32,8 +36,13 @@ function Hero() {
 
           {/* BUTTONS */}
           <div className="mt-8 flex items-center gap-4">
-            <Link to="/login">
+            <Link to={user ? "/dashboard" : "/register"}>
               <Button className="h-12 px-8 text-base">Start Free</Button>
+            </Link>
+            <Link to={user ? "/dashboard/docs" : "/login"}>
+              <Button variant="outline" className="h-12 px-8 text-base bg-transparent border-[var(--border-strong)] text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]">
+                View Docs
+              </Button>
             </Link>
           </div>
 
