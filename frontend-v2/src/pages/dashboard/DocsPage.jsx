@@ -105,7 +105,8 @@ function DocsPage() {
                     <div className="mb-4">
                       <CodeBlock title="Terminal" code={`npm install rateguard-sdk`} />
                     </div>
-                    <div className="shadow-xl rounded-xl overflow-hidden border border-[var(--border-subtle)]">
+                    <p className="font-semibold text-sm mb-2 text-[var(--text-primary)]">For all routes (Global Middleware):</p>
+                    <div className="shadow-xl rounded-xl overflow-hidden border border-[var(--border-subtle)] mb-6">
                       <CodeBlock 
                         title="server.js" 
                         code={`import express from "express";
@@ -113,18 +114,28 @@ import { rateGuard } from "rateguard-sdk";
 
 const app = express();
 
-// Global Middleware: Protects all routes
 app.use(
   rateGuard({
     apiKey: "YOUR_API_KEY",
     baseUrl: "${apiUrl}" 
   })
-);
+);`} 
+                      />
+                    </div>
 
-// Route Middleware: Protects specific routes
-app.get("/api/sensitive", rateGuard({ apiKey: "YOUR_API_KEY", baseUrl: "${apiUrl}" }), (req, res) => {
-  res.json({ message: "Protected!" });
-});`} 
+                    <p className="font-semibold text-sm mb-2 text-[var(--text-primary)]">For specific routes:</p>
+                    <div className="shadow-xl rounded-xl overflow-hidden border border-[var(--border-subtle)]">
+                      <CodeBlock 
+                        title="routes.js" 
+                        code={`import { rateGuard } from "rateguard-sdk";
+
+const rateLimiter = rateGuard({
+    apiKey: process.env.RATEGUARD_API_KEY,
+    baseUrl: "${apiUrl}" 
+});
+
+// Example
+router.post("/login", rateLimiter, loginController);`} 
                       />
                     </div>
                   </div>
