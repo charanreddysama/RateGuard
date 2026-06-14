@@ -15,21 +15,18 @@ const API = axios.create({
   withCredentials: true
 });
 
-// Automatically attach token
-API.interceptors.request.use(
-
-  (config) => {
-
-    const token =
-      localStorage.getItem("token");
-
-    if (token) {
-
-      config.headers.Authorization =
-        `Bearer ${token}`;
+// Handle 401 Unauthorized globally
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      // If the backend rejects the cookie, clear local user and redirect to login
+      localStorage.removeItem("user");
+      if (window.location.pathname !== "/login" && window.location.pathname !== "/") {
+        window.location.href = "/login";
+      }
     }
-
-    return config;
+    return Promise.reject(error);
   }
 );
 

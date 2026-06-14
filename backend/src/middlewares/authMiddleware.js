@@ -9,9 +9,8 @@ import jwt from "jsonwebtoken";
 
 export const authMiddleware = (req, res, next) => {
   try {
-    // 1. Check if the user sent a token in their request headers
-    // It usually looks like: "Bearer abc123xyz..."
-    const token = req.headers.authorization?.split(" ")[1];
+    // 1. Check if the user sent a token in their cookies
+    const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
     if (!token) {
       // 2. If there is no token at all, stop them here. (401 Unauthorized)

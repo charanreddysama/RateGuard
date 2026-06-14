@@ -67,10 +67,10 @@ function ProjectProvider({
 
 useEffect(() => {
 
-  const token =
-    localStorage.getItem("token");
+  const user =
+    localStorage.getItem("user");
 
-  if (!token) return;
+  if (!user) return;
 
   fetchProjects();
 

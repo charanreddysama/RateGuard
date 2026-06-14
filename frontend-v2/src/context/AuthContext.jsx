@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import API from "../services/api/axios";
 
 // ==========================================
 // AUTH CONTEXT (Global User Data)
@@ -16,34 +17,35 @@ function AuthProvider({ children }) {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  // 2. STATE: Keep track of their secret JWT Token
-  const [token, setToken] = useState(() => localStorage.getItem("token") || null);
-
-  // 3. LOGIN FUNCTION: Called when the user successfully signs in
-  const login = (userData, jwtToken) => {
+  // 2. LOGIN FUNCTION: Called when the user successfully signs in
+  const login = (userData) => {
     // Update the app's live memory (React state)
     setUser(userData);
-    setToken(jwtToken);
 
     // Save it to the browser's hard drive (localStorage) so they stay logged in after closing the tab
-    localStorage.setItem("token", jwtToken);
     localStorage.setItem("user", JSON.stringify(userData));
   };
 
-  // 4. LOGOUT FUNCTION: Called when they click the logout button
-  const logout = () => {
+  // 3. LOGOUT FUNCTION: Called when they click the logout button
+  const logout = async () => {
+    try {
+      // Hit the backend to clear the HttpOnly cookie
+      // Assume API is imported from axios.js, we need to import it at the top
+      await API.post("/auth/logout");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+
     // Clear the app's live memory
     setUser(null);
-    setToken(null);
 
     // Erase the data from the browser's hard drive
-    localStorage.removeItem("token");
     localStorage.removeItem("user");
   };
 
   return (
     // We wrap our entire app in this Provider, and "value" is what we share with every page
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

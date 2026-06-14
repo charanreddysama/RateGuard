@@ -48,10 +48,16 @@ export const register = async (req, res) => {
       { expiresIn: "7d" }
     );
 
-    // 6. Send a success message along with the token and user data back to the frontend
+    // 6. Set the HttpOnly cookie and send user data back to the frontend
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    });
+
     res.status(201).json({
       message: "User Registered",
-      token,
       user: {
         id: user._id,
         name: user.name,
@@ -109,9 +115,15 @@ export const login = async (req, res) => {
       }
     );
 
-    // 5. Send the token and user data to the frontend so they can access the dashboard
+    // 5. Set the HttpOnly cookie and send user data to the frontend so they can access the dashboard
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    });
+
     res.json({
-      token,
       user: {
         id: user._id,
         name: user.name,
@@ -125,4 +137,16 @@ export const login = async (req, res) => {
       message: error.message
     });
   }
+};
+
+// ==========================================
+// LOGOUT FUNCTION: Clears the HttpOnly cookie
+// ==========================================
+export const logout = (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none"
+  });
+  res.json({ message: "Logged out successfully" });
 };

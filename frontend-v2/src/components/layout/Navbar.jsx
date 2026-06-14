@@ -1,18 +1,21 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useContext } from "react";
 import ThemeToggle from "../ui/ThemeToggle";
 import Button from "../ui/Button";
+import { AuthContext } from "../../context/AuthContext";
 
 function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, logout } = useContext(AuthContext);
   
   const authPage = location.pathname === "/login" || location.pathname === "/register";
-  const isLoggedIn = !!localStorage.getItem("token");
+  const isLoggedIn = !!user;
   const navItems = ["Features", "SDK"];
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
+  const handleLogout = async () => {
+    await logout();
     navigate("/");
   };
 
