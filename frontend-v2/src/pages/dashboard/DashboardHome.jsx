@@ -34,6 +34,16 @@ function DashboardHome() {
     );
   }
 
+  if (!stats) {
+    return (
+      <DashboardLayout>
+        <div className="flex items-center justify-center h-64">
+          <p className="text-[var(--text-secondary)]">Unable to load dashboard data. Please try refreshing.</p>
+        </div>
+      </DashboardLayout>
+    );
+  }
+
   const successRate = stats.totalRequests > 0
     ? ((stats.successfulRequests / stats.totalRequests) * 100).toFixed(1)
     : 0;
